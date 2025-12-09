@@ -1,0 +1,22 @@
+﻿# Ignorar archivos sensibles y temporales
+config/db.php
+*.log
+*.tmp
+*.bak
+*.zip
+__MACOSX/
+.vscode/
+node_modules/
+
+# Imágenes dinámicas (no se suben)
+public/uploads/
+public/img/comercios/
+public/img/repartidores/
+public/img/usuarios/
+public/img/pedidos/
+public/uploads/*
+!public/uploads/.gitkeep
+
+# Mantener las imágenes del sistema
+!public/img/
+!geovisor/
