@@ -3,6 +3,7 @@ require "../includes/auth_check.php";
 require_once "../config/db.php";
 include "../includes/header.php";
 
+
 $usuario = $_SESSION["user"] ?? null;
 
 // ============================
