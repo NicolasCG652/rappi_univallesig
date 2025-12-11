@@ -120,7 +120,7 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         <div style="display:flex;align-items:center;gap:1rem;margin-top:1rem;">
             <a href="../geovisor/index.html" class="btn">🗺️ Ver geovisor</a>
-            <span style="background:#ffead1;color:#ff6f00;padding:.4rem 1rem;border-radius:20px;font-weight:600;">
+            <span style="background:#ffead1;color:#E4080A;padding:.4rem 1rem;border-radius:20px;font-weight:600;">
                 <?= $cantidadComercios ?> comercios activos
             </span>
         </div>
@@ -171,7 +171,7 @@ $pedidos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 <?php if (strtoupper($p["estado"]) === "EN CAMINO"): ?>
                     <a href="../rutas/usuario_ruta.php?id_pedido=<?= $p["id"] ?>" 
                         target="_blank"
-                        style="background:linear-gradient(135deg,#007bff,#0056d2);color:#fff;
+                        style="background:linear-gradient(135deg,#E4080A,#0056d2);color:#fff;
                         padding:.45rem .9rem;border:none;border-radius:999px;
                         text-decoration:none;font-weight:600;display:inline-block;margin-top:.7rem;">
                         🗺️ Ver por dónde viene mi pedido

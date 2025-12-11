@@ -65,10 +65,10 @@ html, body, #map {
 }
 .info-box h3 {
   margin: 0 0 .5rem;
-  color: #ff6f00;
+  color: #ff0000ff;
 }
 button, .btn-back {
-  background: linear-gradient(135deg, #ff8f00, #ff6f00);
+  background: linear-gradient(135deg, #ff0000ff, #ac0000ff);
   color: #fff;
   border: none;
   padding: .5rem 1rem;
@@ -80,7 +80,7 @@ button, .btn-back {
   margin-top: .5rem;
 }
 button:hover, .btn-back:hover {
-  background: linear-gradient(135deg, #ff9f22, #ff7f00);
+  background: linear-gradient(135deg, #ff2222ff, #980000ff);
 }
 </style>
 </head>
@@ -129,7 +129,7 @@ async function calcularRuta() {
   if (routeLayer) map.removeLayer(routeLayer);
 
   // Dibujar ruta óptima
-  routeLayer = L.geoJSON(data.route, { color: "#ff6f00", weight: 5 }).addTo(map);
+  routeLayer = L.geoJSON(data.route, { color: "#ff0000ff", weight: 5 }).addTo(map);
   map.fitBounds(routeLayer.getBounds());
 
   // Dibujar puntos de interés

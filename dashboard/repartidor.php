@@ -121,7 +121,7 @@ $comercios = $pdo->query('SELECT nombre, ST_X(geom) AS lon, ST_Y(geom) AS lat
 .slider:before { position: absolute; content: ""; height: 20px; width: 20px;
                  left: 4px; bottom: 4px; background-color: white; transition: .4s;
                  border-radius: 50%; }
-input:checked + .slider { background-color: #00b894; }
+input:checked + .slider { background-color: #2200b8ff; }
 input:checked + .slider:before { transform: translateX(24px); }
 #map { height: 420px; border-radius: 14px; margin-top: 1.2rem; box-shadow: 0 6px 18px rgba(0,0,0,0.2); }
 </style>
@@ -186,14 +186,14 @@ $asignados = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     <div style="display:flex;gap:.6rem;flex-wrap:wrap;">
                         <a href="../rutas/repartidor_ruta.php?id_pedido=<?= $p["id"] ?>" 
                            target="_blank"
-                           style="background:linear-gradient(135deg,#007bff,#0056d2);color:#fff;
+                           style="background:linear-gradient(135deg,#FC0A0C,#0056d2);color:#fff;
                            padding:.45rem .9rem;border:none;border-radius:999px;
                            text-decoration:none;font-weight:600;">
                            🗺️ Ver ruta
                         </a>
 
                         <a href="../pedidos/actualizar_estado.php?id=<?= $p["id"] ?>&estado=entregado" 
-                           style="background:linear-gradient(135deg,#ff8f00,#ff6f00);
+                           style="background:linear-gradient(135deg,#FC0A0C,#FC0A0C);
                            color:#fff;padding:.45rem .9rem;border:none;border-radius:999px;
                            text-decoration:none;font-weight:600;">
                            ✅ Marcar como entregado
@@ -209,7 +209,7 @@ $asignados = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <!-- Botón "Ver pedidos disponibles" -->
 <a href="ajustar_ubicacion_repartidor.php?from=repartidor" class="btn" 
-   style="margin-top:1rem;background:linear-gradient(135deg,#ff8f00,#ff6f00);
+   style="margin-top:1rem;background:linear-gradient(135deg,#FF0103,#B50102);
           color:#fff;padding:.6rem 1rem;border-radius:999px;
           text-decoration:none;font-weight:600;">
   📍 Ver pedidos disponibles

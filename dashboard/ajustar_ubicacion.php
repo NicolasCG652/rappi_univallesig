@@ -39,7 +39,7 @@ html, body, #map {
 }
 #panel h3 {
   margin: 0 0 .5rem 0;
-  color: #ff6f00;
+  color: #ff0000ff;
   font-size: 1.2rem;
 }
 #panel p {
@@ -47,7 +47,7 @@ html, body, #map {
   color: #444;
 }
 button {
-  background: linear-gradient(135deg, #ff8f00, #ff6f00);
+  background: linear-gradient(135deg, #ff2323ff, #ff0000ff);
   border: none;
   color: #fff;
   padding: .6rem 1.2rem;
@@ -58,11 +58,11 @@ button {
   width: 100%;
 }
 button:hover {
-  background: linear-gradient(135deg, #ff9f22, #ff7f00);
+  background: linear-gradient(135deg, #ff2222ff, #ff0000ff);
 }
 #msg-aviso {
   background: #fff9d6;
-  border-left: 5px solid #ffcc00;
+  border-left: 5px solid #ff0000ff;
   padding: .6rem;
   border-radius: 6px;
   margin-bottom: .6rem;

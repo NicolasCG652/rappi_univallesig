@@ -314,7 +314,7 @@ form button {
                         <p><?= htmlspecialchars($p["descripcion"]) ?></p>
                         <strong>$<?= number_format($p["precio"], 2) ?></strong>
                         <div class="actions">
-                            <a href="?delete=<?= $p["id"] ?>" class="btn small" style="background:#dc2626;">Eliminar</a>
+                            <a href="?delete=<?= $p["id"] ?>" class="btn small" style="background:#E2E0E0;">Eliminar</a>
                         </div>
                     </div>
                 </div>
@@ -338,7 +338,7 @@ elseif ($rol === "comercio") include "comercio_pedidos.php";
 elseif ($rol === "repartidor") include "repartidor_pedidos.php";
 ?>
 <a href="ajustar_ubicacion_comercio.php"
-   style="background:linear-gradient(135deg,#ff8f00,#ff6f00);color:#fff;
+   style="background:linear-gradient(135deg,#F80101,#F80101);color:#fff;
           padding:.5rem 1rem;border-radius:999px;text-decoration:none;
           font-weight:600;">
 📍 Ajustar mi ubicación

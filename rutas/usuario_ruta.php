@@ -56,7 +56,7 @@ html, body, #map { height: 100%; margin: 0; }
   box-shadow: 0 3px 6px rgba(0,0,0,0.3);
   font-family: 'Segoe UI', sans-serif;
 }
-.info-box h3 { margin: 0 0 .5rem; color: #ff6f00; }
+.info-box h3 { margin: 0 0 .5rem; color: #ff0000ff; }
 </style>
 </head>
 <body>
@@ -84,7 +84,7 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // Mostrar ruta directamente desde GeoJSON (sin tocar)
 try {
   const ruta = JSON.parse(pedido.ruta);
-  const layer = L.geoJSON(ruta, { color: "#ff6f00", weight: 5 }).addTo(map);
+  const layer = L.geoJSON(ruta, { color: "#ff0000ff", weight: 5 }).addTo(map);
   map.fitBounds(layer.getBounds());
 } catch (err) {
   console.error("❌ Error mostrando ruta:", err);
@@ -95,17 +95,17 @@ try {
 // 🔹 Agregar marcadores
 // ===============================
 const iconRider = L.icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/149/149060.png",
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/2972/2972185.png",
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 const iconShop = L.icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/190/190411.png",
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/869/869636.png",
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
 const iconUser = L.icon({
-  iconUrl: "https://cdn-icons-png.flaticon.com/512/1077/1077012.png",
+  iconUrl: "https://cdn-icons-png.flaticon.com/512/3177/3177440.png",
   iconSize: [32, 32],
   iconAnchor: [16, 32]
 });
