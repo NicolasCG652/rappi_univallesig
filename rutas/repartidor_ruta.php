@@ -67,7 +67,7 @@ html, body, #map {
   margin: 0 0 .5rem;
   color: #ff6f00;
 }
-button {
+button, .btn-back {
   background: linear-gradient(135deg, #ff8f00, #ff6f00);
   color: #fff;
   border: none;
@@ -75,8 +75,11 @@ button {
   border-radius: 999px;
   cursor: pointer;
   font-weight: 600;
+  display: inline-block;
+  text-decoration: none;
+  margin-top: .5rem;
 }
-button:hover {
+button:hover, .btn-back:hover {
   background: linear-gradient(135deg, #ff9f22, #ff7f00);
 }
 </style>
@@ -88,7 +91,9 @@ button:hover {
   <h3>🚴 Ruta del pedido #<?= htmlspecialchars($id_pedido) ?></h3>
   <p><strong>De:</strong> <?= htmlspecialchars($pedido["comercio_nombre"]) ?><br>
      <strong>Para:</strong> <?= htmlspecialchars($pedido["usuario_nombre"]) ?></p>
-  <button onclick="calcularRuta()">🔄 Ver ruta óptima</button>
+
+  <button onclick="calcularRuta()">🔄 Ver ruta óptima</button><br>
+  <a href="../dashboard/repartidor.php" class="btn-back">⬅️ Volver al panel</a>
 </div>
 
 <script>
@@ -97,9 +102,9 @@ const pedido = <?= json_encode($pedido, JSON_UNESCAPED_UNICODE) ?>;
 
 // Inicializar mapa base igual al QGIS2Web
 let map = L.map('map').setView([pedido.rep_lat, pedido.rep_lon], 17);
-L.tileLayer('https://mt1.google.com/vt/lyrs=m&x={x}&y={y}&z={z}', {
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   maxZoom: 22,
-  attribution: 'Map data © Google'
+  attribution: 'Map data © OpenStreetMap contributors'
 }).addTo(map);
 
 let routeLayer = null;
@@ -113,7 +118,6 @@ async function calcularRuta() {
   if (!data.ok) {
     alert("❌ " + data.error);
     if (data.debug) {
-      // Mostrar puntos de depuración si existen
       if (data.debug.repartidor) L.geoJSON(data.debug.repartidor, {color:'red'}).addTo(map);
       if (data.debug.comercio) L.geoJSON(data.debug.comercio, {color:'blue'}).addTo(map);
       if (data.debug.usuario) L.geoJSON(data.debug.usuario, {color:'green'}).addTo(map);

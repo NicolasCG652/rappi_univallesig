@@ -25,6 +25,9 @@ if (!$id_pedido || !$latR || !$lonR || !$latC || !$lonC || !$latU || !$lonU) {
 }
 
 try {
+    // =======================================
+    // 🧮 Cálculo de ruta (pgRouting + PostGIS)
+    // =======================================
     $sql = "
     WITH puntos AS (
         SELECT
@@ -71,10 +74,10 @@ try {
     )
     SELECT
         ST_AsGeoJSON(ST_Transform(ST_Union(v.geom), 4326)) AS geom,
-        SUM(v.cost) AS total_cost,
         ST_AsGeoJSON(ST_Transform((SELECT geom_rep FROM puntos), 4326)) AS rep,
         ST_AsGeoJSON(ST_Transform((SELECT geom_com FROM puntos), 4326)) AS com,
-        ST_AsGeoJSON(ST_Transform((SELECT geom_usr FROM puntos), 4326)) AS usr
+        ST_AsGeoJSON(ST_Transform((SELECT geom_usr FROM puntos), 4326)) AS usr,
+        SUM(v.cost) AS total_cost
     FROM \"Expansion_Universitaria\".\"vias\" v
     JOIN todas t ON v.id_0 = t.edge;
     ";
@@ -85,9 +88,11 @@ try {
         ":latC" => $latC, ":lonC" => $lonC,
         ":latU" => $latU, ":lonU" => $lonU
     ]);
-
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    // =======================
+    // 🚨 Si no hay ruta
+    // =======================
     if (!$row || !$row["geom"]) {
         echo json_encode([
             "ok" => false,
@@ -101,33 +106,40 @@ try {
         exit;
     }
 
-    // ==========================
-    // 🔹 Guardar ruta en la BD (ruta_geom)
-    // ==========================
+    // =======================================
+    // 💾 Guardar la ruta en la tabla pedidos
+    // =======================================
     $update = $pdo->prepare('
-        UPDATE "Division_Geografica"."pedidos"
-SET ruta_geom = ST_LineMerge(ST_SetSRID(ST_GeomFromGeoJSON(:geojson), 3115))
-WHERE id = :id_pedido
-
-    ');
+    UPDATE "Division_Geografica"."pedidos"
+    SET ruta_geom = ST_LineMerge(ST_CollectionExtract(ST_Multi(ST_SetSRID(ST_GeomFromGeoJSON(:geojson), 3115)), 2))
+    WHERE id = :id_pedido
+');
     $update->execute([
         ":geojson" => $row["geom"],
         ":id_pedido" => $id_pedido
     ]);
 
-    // ==========================
-    // 🔹 Respuesta JSON
-    // ==========================
+    // =======================================
+    // 📤 Devolver respuesta JSON
+    // =======================================
     echo json_encode([
         "ok" => true,
         "route" => json_decode($row["geom"]),
         "meta" => [
             "distancia_m" => round($row["total_cost"], 2),
             "mensaje" => "Ruta generada correctamente 🚴"
+        ],
+        "debug" => [
+            "repartidor" => json_decode($row["rep"]),
+            "comercio"   => json_decode($row["com"]),
+            "usuario"    => json_decode($row["usr"])
         ]
     ], JSON_UNESCAPED_UNICODE);
 
 } catch (Exception $e) {
-    echo json_encode(["ok" => false, "error" => "Error pgRouting: ".$e->getMessage()]);
+    echo json_encode([
+        "ok" => false,
+        "error" => "Error pgRouting: " . $e->getMessage()
+    ]);
 }
 ?>
