@@ -107,6 +107,8 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data © OpenStreetMap contributors'
 }).addTo(map);
 
+
+
 let routeLayer = null;
 
 // 🔹 Calcular ruta y dibujarla
@@ -131,6 +133,7 @@ async function calcularRuta() {
   // Dibujar ruta óptima
   routeLayer = L.geoJSON(data.route, { color: "#ff0000ff", weight: 5 }).addTo(map);
   map.fitBounds(routeLayer.getBounds());
+  
 
   // Dibujar puntos de interés
   L.marker([pedido.rep_lat, pedido.rep_lon]).addTo(map).bindPopup("🚴 Repartidor");
@@ -148,6 +151,7 @@ async function calcularRuta() {
 
 // Ejecutar automáticamente al cargar
 calcularRuta();
+
 </script>
 </body>
 </html>

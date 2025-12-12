@@ -106,18 +106,16 @@ try {
         exit;
     }
 
-    // =======================================
-    // 💾 Guardar la ruta en la tabla pedidos
-    // =======================================
-    $update = $pdo->prepare('
+// Guardar la ruta sin errores de tipo ni funciones de agregación
+$update = $pdo->prepare('
     UPDATE "Division_Geografica"."pedidos"
-    SET ruta_geom = ST_LineMerge(ST_CollectionExtract(ST_Multi(ST_SetSRID(ST_GeomFromGeoJSON(:geojson), 3115)), 2))
+    SET ruta_geom = ST_Multi(ST_SetSRID(ST_GeomFromGeoJSON(:geojson), 3115))
     WHERE id = :id_pedido
 ');
-    $update->execute([
-        ":geojson" => $row["geom"],
-        ":id_pedido" => $id_pedido
-    ]);
+$update->execute([
+    ":geojson" => $row["geom"],
+    ":id_pedido" => $id_pedido
+]);
 
     // =======================================
     // 📤 Devolver respuesta JSON

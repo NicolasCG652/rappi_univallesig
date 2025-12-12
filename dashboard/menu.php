@@ -32,12 +32,13 @@ if (!$id_comercio) {
     exit;
 }
 
-// Obtener información del comercio
-$stmt = $pdo->prepare('SELECT nombre, imagen, email 
+// Obtener comercio por su código, no por gid
+$stmt = $pdo->prepare('SELECT codigo_com, nombre, imagen, email 
                        FROM "Division_Geografica"."comercio" 
-                       WHERE codigo_com = :id OR gid = CAST(:id AS INTEGER)');
-$stmt->execute([":id" => $id_comercio]);
+                       WHERE codigo_com = :id');
+$stmt->execute([":id" => $_GET["id"]]);
 $comercio = $stmt->fetch(PDO::FETCH_ASSOC);
+
 
 if (!$comercio) {
     echo "<p>⚠️ Comercio no encontrado en la base de datos.</p>";

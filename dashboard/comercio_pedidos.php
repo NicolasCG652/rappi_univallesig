@@ -46,4 +46,3 @@ border-radius:12px;margin-bottom:1rem;box-shadow:0 5px 14px rgba(0,0,0,0.1);}
   <?php endforeach; endif; ?>
 </div>
 
-<script>setInterval(()=>{location.reload();},5000);</script>
