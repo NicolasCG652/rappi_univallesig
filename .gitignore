@@ -10,7 +10,6 @@ node_modules/
 
 # Imágenes dinámicas (no se suben)
 public/uploads/
-public/img/comercios/
 public/img/repartidores/
 public/img/usuarios/
 public/img/pedidos/
